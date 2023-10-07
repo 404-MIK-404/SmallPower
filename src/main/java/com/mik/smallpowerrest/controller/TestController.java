@@ -3,12 +3,17 @@ package com.mik.smallpowerrest.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.mik.smallpowerrest.domain.TEST_SPR;
+import com.mik.smallpowerrest.exception.FailLoadFileException;
 import com.mik.smallpowerrest.service.ServiceTest;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -18,11 +23,11 @@ public class TestController {
 
     private final ServiceTest serviceTest;
 
-    private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     @GetMapping(value = "/hello")
     public String testMethod(){
-        return gson.toJson(serviceTest.t());
+        return Optional.of(serviceTest.t())
+                .orElseThrow(()-> new FailLoadFileException("Ошибка в работе метода !"));
     }
 
 }

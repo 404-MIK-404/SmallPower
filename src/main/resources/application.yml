@@ -1,0 +1,14 @@
+security:
+  secret: test-secret
+
+
+
+
+logging:
+  file:
+    name: ./logs/app.log
+  level:
+    org:
+      springframework:
+        web: DEBUG
+      hibernate: ERROR
